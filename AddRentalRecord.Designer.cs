@@ -1,6 +1,6 @@
 ﻿namespace CarRentalApplication
 {
-    partial class Form1
+    partial class AddRentalRecord
     {
         /// <summary>
         /// Required designer variable.
@@ -49,9 +49,9 @@
             this.label1.Location = new System.Drawing.Point(177, 63);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(237, 40);
+            this.label1.Size = new System.Drawing.Size(235, 40);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Car Rental System";
+            this.label1.Text = "Add Rental Record";
             // 
             // tbCustomerName
             // 
@@ -144,7 +144,7 @@
             this.btSubmit.TabIndex = 9;
             this.btSubmit.Text = "Submit";
             this.btSubmit.UseVisualStyleBackColor = true;
-            this.btSubmit.Click += new System.EventHandler(this.costText_ValueChanged);
+            this.btSubmit.Click += new System.EventHandler(this.submitButton_Clicked);
             // 
             // label6
             // 
@@ -166,7 +166,7 @@
             this.tbCost.TabIndex = 10;
             this.tbCost.TextChanged += new System.EventHandler(this.costText_ValueChanged);
             // 
-            // Form1
+            // AddRentalRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -184,8 +184,8 @@
             this.Controls.Add(this.tbCustomerName);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "AddRentalRecord";
+            this.Text = "Add Rental Record";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

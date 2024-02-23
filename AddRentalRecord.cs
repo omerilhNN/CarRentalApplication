@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace CarRentalApplication
 {
-    public partial class Form1 : Form
+    public partial class AddRentalRecord : Form
     {
         private readonly CarRentalEntities carRentalEntities;    
-        public Form1()
+        public AddRentalRecord()
         {
             InitializeComponent();
             carRentalEntities = new CarRentalEntities();
@@ -63,6 +63,17 @@ namespace CarRentalApplication
 
                 if (isValid == true)
                 {
+                    var rentalRecord = new CarRentalRecord(); //Directly access to the CarRentalRecord Table from right here
+                    rentalRecord.CustomerName = customerName; //fill the table with that info that has been given from input
+                    rentalRecord.DateRented = dateOut;
+                    rentalRecord.DateReturned = dateIn;
+                    rentalRecord.Cost = (decimal)cost; // cast double to Decimal 
+                    //in order to keep its Id cast Selected cars'id to INT
+                    rentalRecord.TypeOfCarId = (int)cbTypeCar.SelectedValue;
+                    //Filled the table object with all the datas above. Now you need to push it to DB and SAVE it down below
+
+                    carRentalEntities.CarRentalRecord.Add(rentalRecord);
+                    carRentalEntities.SaveChanges();
                     MessageBox.Show($"Customer name: {customerName}\n\r" +
                                    $"Date Rented: {dateOut}\n\r" +
                                    $"Date Returned: {dateIn}\n\r" +
@@ -98,6 +109,5 @@ namespace CarRentalApplication
 
         }
 
-       
     }
 }
