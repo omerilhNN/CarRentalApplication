@@ -22,7 +22,10 @@ namespace CarRentalApplication
         {
             //SELECT * from TypesOfCars
             //Query the data from DB and keep it in the list
-            var cars = carRentalEntities.TypesOfCars.ToList();
+            //var cars = carRentalEntities.TypesOfCars.ToList();
+            var cars = carRentalEntities.TypesOfCars
+                .Select(q => new { id = q.id, name = q.make + " " + q.model }).ToList();
+
             cbTypeCar.DisplayMember = "Name"; //Set display member to Name
             cbTypeCar.ValueMember = "id"; // set store the value which is id
             cbTypeCar.DataSource = cars; // initialize it with cars

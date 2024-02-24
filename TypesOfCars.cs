@@ -21,7 +21,11 @@ namespace CarRentalApplication
         }
     
         public int id { get; set; }
-        public string name { get; set; }
+        public string make { get; set; }
+        public string model { get; set; }
+        public string vin { get; set; }
+        public string licensePlateNumber { get; set; }
+        public Nullable<int> year { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarRentalRecord> CarRentalRecord { get; set; }

@@ -28,5 +28,12 @@ namespace CarRentalApplication
             addRentalRecord.MdiParent = this;   
             addRentalRecord.Show();
         }
+
+        private void manageVehicleListingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var vehicleListing = new ManageVehicleListing(); //Create an object for ManageVehicleListing form and set its parent to the MainWindow
+            vehicleListing.MdiParent = this;
+            vehicleListing.Show();  
+        }
     }
 }
