@@ -19,6 +19,7 @@ namespace CarRentalApplication
         {
             InitializeComponent();
             lblTitle.Text = "Add New Vehicle";
+            this.Text = "Add New Vehicle";
             isEditMode = false;
             _db = new CarRentalEntities();  
         }
@@ -26,9 +27,18 @@ namespace CarRentalApplication
         {
             InitializeComponent();
             lblTitle.Text = "Edit Vehicle";
-            isEditMode = true;
-            _db = new CarRentalEntities();
-            PopulateFields(carToEdit);
+            this.Text = "Edit Vehicle";
+            if(carToEdit == null ) 
+            {
+                MessageBox.Show("Please ensure that you selected a valid record to edit");
+                Close();
+            }
+            else
+            {
+                isEditMode = true;
+                _db = new CarRentalEntities();
+                PopulateFields(carToEdit);
+            }
         }
 
         private void PopulateFields(TypesOfCars car)

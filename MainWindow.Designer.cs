@@ -77,21 +77,22 @@
             // addRentalRecordToolStripMenuItem
             // 
             this.addRentalRecordToolStripMenuItem.Name = "addRentalRecordToolStripMenuItem";
-            this.addRentalRecordToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.addRentalRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addRentalRecordToolStripMenuItem.Text = "Add Rental Record";
             this.addRentalRecordToolStripMenuItem.Click += new System.EventHandler(this.addRentalRecordToolStripMenuItem_Click);
             // 
             // editRentalRecorToolStripMenuItem
             // 
             this.editRentalRecorToolStripMenuItem.Name = "editRentalRecorToolStripMenuItem";
-            this.editRentalRecorToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.editRentalRecorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editRentalRecorToolStripMenuItem.Text = "Edit Rental Recor";
             // 
             // viewArchivToolStripMenuItem
             // 
             this.viewArchivToolStripMenuItem.Name = "viewArchivToolStripMenuItem";
-            this.viewArchivToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.viewArchivToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewArchivToolStripMenuItem.Text = "View Archive";
+            this.viewArchivToolStripMenuItem.Click += new System.EventHandler(this.viewArchivToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
