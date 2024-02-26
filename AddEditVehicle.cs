@@ -12,23 +12,25 @@ namespace CarRentalApplication
 {
     public partial class AddEditVehicle : Form
     {
-
+        private ManageVehicleListing _manageVehicleListing;
         private readonly CarRentalEntities _db; //Container name -> inside CarRentalDb.edmx file -> represents the database object
         private bool isEditMode;
-        public AddEditVehicle()
+        public AddEditVehicle(ManageVehicleListing manageVehicleListing = null)
         {
             InitializeComponent();
             lblTitle.Text = "Add New Vehicle";
             this.Text = "Add New Vehicle";
             isEditMode = false;
+            _manageVehicleListing = manageVehicleListing;   
             _db = new CarRentalEntities();  
         }
-        public AddEditVehicle(TypesOfCars carToEdit)
+        public AddEditVehicle(TypesOfCars carToEdit, ManageVehicleListing manageVehicleListing = null)
         {
             InitializeComponent();
             lblTitle.Text = "Edit Vehicle";
             this.Text = "Edit Vehicle";
-            if(carToEdit == null ) 
+            _manageVehicleListing = manageVehicleListing;
+            if (carToEdit == null ) 
             {
                 MessageBox.Show("Please ensure that you selected a valid record to edit");
                 Close();
@@ -53,33 +55,55 @@ namespace CarRentalApplication
 
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            if (isEditMode)
+            try
             {
-                //Edit code -> there is a car existing 
-                var id = int.Parse(lblId.Text); 
-                var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);  //Returns the first element that satisfies the condition else Return default
-                car.model = tbModel.Text;
-                car.make = tbMake.Text;
-                car.vin = tbVin.Text;
-                car.year = int.Parse(tbYear.Text);
-                car.licensePlateNumber = tbLicensePlateNumber.Text;
-
-                _db.SaveChanges();
-            }
-            else
-            {
-                //Adding a new car code here
-                var newCar = new TypesOfCars
+                //Added Validation for make and model
+                if (string.IsNullOrWhiteSpace(tbMake.Text) ||
+                        string.IsNullOrWhiteSpace(tbModel.Text))
                 {
-                    licensePlateNumber = tbLicensePlateNumber.Text,
-                    make = tbMake.Text,
-                    model = tbModel.Text,
-                    vin = tbVin.Text,
-                    year = int.Parse(tbYear.Text)
-                };
-                //Add it to DB
-                _db.TypesOfCars.Add(newCar);
+                    MessageBox.Show("Please ensure that you provide a make and a model");
+                }
+                else
+                {
+                    //if(isEditMode == true)
+                    if (isEditMode)
+                    {
+                        //Edit Code here
+                        var id = int.Parse(lblId.Text);
+                        var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);
+                        car.model = tbModel.Text;
+                        car.make = tbMake.Text;
+                        car.vin= tbVin.Text;
+                        car.year = int.Parse(tbYear.Text);
+                        car.licensePlateNumber = tbLicensePlateNumber.Text;
+                       
+                    }
+                    else
+                    {
+                        //Added validation for make and model of cars being added
 
+                        // Add Code Here
+                        var newCar = new TypesOfCars
+                        {
+                            licensePlateNumber = tbLicensePlateNumber.Text,
+                            make = tbMake.Text,
+                            model = tbModel.Text,
+                            vin= tbVin.Text,
+                            year = int.Parse(tbYear.Text)
+                        };
+
+                        _db.TypesOfCars.Add(newCar);
+
+                    }
+                    _db.SaveChanges();
+                    _manageVehicleListing.PopulateGrid();
+                    MessageBox.Show("Operation Completed. Refresh Grid To see Changes");
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
 

@@ -12,6 +12,12 @@ namespace CarRentalApplication
 {
     public partial class MainWindow : Form
     {
+        private Login _login;
+        public MainWindow(Login login)
+        {
+            InitializeComponent();
+            _login = login; 
+        }
         public MainWindow()
         {
             InitializeComponent();
@@ -25,15 +31,20 @@ namespace CarRentalApplication
         private void addRentalRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var addRentalRecord = new AddEditRentalRecord();
+            addRentalRecord.ShowDialog();
             addRentalRecord.MdiParent = this;   
-            addRentalRecord.Show();
         }
 
         private void manageVehicleListingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var vehicleListing = new ManageVehicleListing(); //Create an object for ManageVehicleListing form and set its parent to the MainWindow
-            vehicleListing.MdiParent = this;
-            vehicleListing.Show();  
+            var OpenForms = Application.OpenForms.Cast<Form>();
+            var isOpen = OpenForms.Any(q => q.Name == "ManageVehicleListing"); // is there any form named manage vehicle listing Query
+            if (!isOpen)
+            {
+                var vehicleListing = new ManageVehicleListing(); //Create an object for ManageVehicleListing form and set its parent to the MainWindow
+                vehicleListing.MdiParent = this;
+                vehicleListing.Show();  
+            }
         }
 
         private void viewArchivToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,6 +52,11 @@ namespace CarRentalApplication
             var manageRentalRecords = new ManageRentalRecords();
             manageRentalRecords.MdiParent = this;
             manageRentalRecords.Show();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _login.Close(); 
         }
     }
 }

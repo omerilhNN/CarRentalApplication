@@ -48,7 +48,7 @@ namespace CarRentalApplication
 
         private void btnAddNewCar_Click(object sender, EventArgs e)
         {
-            AddEditVehicle addEditVehicle = new AddEditVehicle();
+            var addEditVehicle = new AddEditVehicle(this);
             addEditVehicle.MdiParent = this.MdiParent;
             addEditVehicle.Show();
         }
@@ -64,7 +64,7 @@ namespace CarRentalApplication
                 var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);
 
                 //launch AddEditVehicle window with data 
-                var addEditVehicle = new AddEditVehicle(car);
+                var addEditVehicle = new AddEditVehicle(car,this);
                 addEditVehicle.MdiParent = this.MdiParent;
                 addEditVehicle.Show();
             }catch(Exception ex)
@@ -108,7 +108,7 @@ namespace CarRentalApplication
             PopulateGrid();
         }
 
-        private void PopulateGrid()
+        public void PopulateGrid()
         {
             var cars = _db.TypesOfCars
                 .Select(q => new
